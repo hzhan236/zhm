@@ -16,23 +16,24 @@ public class ArrayDeque<T> {
     }
 
     /**
-     * When array's size reach it's max capacity, then resize the array to the original size * rFactor
+     * When array's size reach it's max capacity, then resize the array
+     * to the original size * rFactor
      *                   or when the size less than 1/4
      * @param capacity
      */
     private void resizeUp(int capacity) {
         T[] a = (T []) new Object[capacity];
-        System.arraycopy(items, nextFirst+1, a, size, size - nextFirst-1);
-        System.arraycopy(items, 0, a, 2*size - nextFirst - 1, nextFirst+1);
+        System.arraycopy(items, nextFirst + 1, a, size, size - nextFirst - 1);
+        System.arraycopy(items, 0, a, 2 * size - nextFirst - 1, nextFirst + 1);
         items = a;
-        nextFirst = size-1;
-        nextLast = (rFactor-1)*size;
+        nextFirst = size - 1;
+        nextLast = (rFactor - 1) * size;
     }
     private void resizeDown(int capacity) {
             T[] a = (T []) new Object[capacity];
-        System.arraycopy(items, nextFirst+1, a, 0,  size);
+        System.arraycopy(items, nextFirst + 1, a, 0,  size);
         items = a;
-        nextFirst = items.length-1;
+        nextFirst = items.length - 1;
         nextLast = 0;
     }
 
@@ -41,11 +42,11 @@ public class ArrayDeque<T> {
             resizeUp(size * rFactor);
         }
         items[nextFirst] = item;
-        size++;
+        size ++;
         if(nextFirst == 0) {
-            nextFirst = items.length -1;
+            nextFirst = items.length - 1;
         } else {
-            nextFirst--;
+            nextFirst --;
         }
     }
 
@@ -54,11 +55,11 @@ public class ArrayDeque<T> {
             resizeUp(size * rFactor);
         }
         items[nextLast] = item;
-        size++;
+        size ++;
         if(nextLast == items.length - 1) {
             nextLast = 0;
         } else {
-            nextLast++;
+            nextLast ++;
         }
     }
 
@@ -83,7 +84,7 @@ public class ArrayDeque<T> {
             if (tempF != tempL - 1) {
                 System.out.print(" ");
             }
-            tempF++;
+            tempF ++;
         }
     }
 
@@ -99,11 +100,11 @@ public class ArrayDeque<T> {
         if(nextFirst == items.length - 1) {
             nextFirst = 0;
         } else {
-            nextFirst++;
+            nextFirst ++;
         }
         T save = items[nextFirst];
         items[nextFirst] = null;
-        size--;
+        size --;
         return save;
     }
 
@@ -119,11 +120,11 @@ public class ArrayDeque<T> {
         if(nextLast == 0) {
             nextLast = items.length-1;
         } else {
-            nextLast--;
+            nextLast --;
         }
         T save = items[nextLast];
         items[nextLast] = null;
-        size--;
+        size --;
         return save;
     }
 
@@ -131,6 +132,6 @@ public class ArrayDeque<T> {
         if(index < 0 || index >= size) {
             return null;
         }
-        return items[index];
+        return items[nextFirst + 1 + index];
     }
 }
