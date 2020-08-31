@@ -135,7 +135,7 @@ public class LinkedListDeque<T> {
      * return null
     */
     public T getRecursive(int index) {
-        if (index <= 0) {
+        if (index < 0) {
             return null;
         }
         ListNode firstNode = sentinel.next;
