@@ -24,8 +24,8 @@ public class ArrayDeque<T> {
      */
     private void resizeUp(int capacity) {
         T[] a = (T[]) new Object[capacity];
-        System.arraycopy(items, nextFirst + 1, a, size, size - nextFirst - 1);
-        System.arraycopy(items, 0, a, 2 * size - nextFirst - 1, nextFirst + 1);
+        System.arraycopy(items, nextFirst + 1, a, size, size - nextFirst);
+        System.arraycopy(items, 0, a, 2 * size - nextFirst, nextFirst);
         items = a;
         nextFirst = size - 1;
         nextLast = (rFactor - 1) * size;
@@ -40,7 +40,7 @@ public class ArrayDeque<T> {
     }
 
     public void addFirst(T item) {
-        if (size == items.length) {
+        if (size == items.length - 1) {
             resizeUp(size * rFactor);
         }
         items[nextFirst] = item;
@@ -53,7 +53,7 @@ public class ArrayDeque<T> {
     }
 
     public void addLast(T item) {
-        if (size == items.length) {
+        if (size == items.length - 1) {
             resizeUp(size * rFactor);
         }
         items[nextLast] = item;
