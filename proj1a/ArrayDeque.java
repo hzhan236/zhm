@@ -9,7 +9,7 @@ public class ArrayDeque<T> {
      * Constructor for ArrayDeque()
      */
     public ArrayDeque() {
-        items = (T []) new Object[8];
+        items = (T[]) new Object[8];
         size = 0;
         nextFirst = 3;
         nextLast = 4;
@@ -18,20 +18,22 @@ public class ArrayDeque<T> {
     /**
      * When array's size reach it's max capacity, then resize the array
      * to the original size * rFactor
-     *                   or when the size less than 1/4
+     * or when the size less than 1/4
+     *
      * @param capacity
      */
     private void resizeUp(int capacity) {
-        T[] a = (T []) new Object[capacity];
+        T[] a = (T[]) new Object[capacity];
         System.arraycopy(items, nextFirst + 1, a, size, size - nextFirst - 1);
         System.arraycopy(items, 0, a, 2 * size - nextFirst - 1, nextFirst + 1);
         items = a;
         nextFirst = size - 1;
         nextLast = (rFactor - 1) * size;
     }
+
     private void resizeDown(int capacity) {
-        T[] a = (T []) new Object[capacity];
-        System.arraycopy(items, nextFirst + 1, a, 0,  size);
+        T[] a = (T[]) new Object[capacity];
+        System.arraycopy(items, nextFirst + 1, a, 0, size);
         items = a;
         nextFirst = items.length - 1;
         nextLast = 0;
@@ -72,14 +74,14 @@ public class ArrayDeque<T> {
     }
 
     public void printDeque() {
-        int tempF = nextFirst+1;
+        int tempF = nextFirst + 1;
         int tempL = nextLast;
-        while(tempF < items.length && items[tempF] != null) {
+        while (tempF < items.length && items[tempF] != null) {
             System.out.print(items[tempF] + " ");
             tempF++;
         }
         tempF = 0;
-        while(tempF < nextLast) {
+        while (tempF < nextLast) {
             System.out.print(items[tempF]);
             if (tempF != tempL - 1) {
                 System.out.print(" ");
@@ -89,15 +91,15 @@ public class ArrayDeque<T> {
     }
 
     public T removeFirst() {
-        if(size == 0) {
+        if (size == 0) {
             return null;
         }
 
-        if(size == items.length / rFactor && size > 8) {
+        if (size == items.length / rFactor && size > 8) {
             resizeDown(items.length / rFactor);
         }
 
-        if(nextFirst == items.length - 1) {
+        if (nextFirst == items.length - 1) {
             nextFirst = 0;
         } else {
             nextFirst++;
@@ -109,15 +111,15 @@ public class ArrayDeque<T> {
     }
 
     public T removeLast() {
-        if(size ==0) {
+        if (size == 0) {
             return null;
         }
 
-        if(size == items.length / rFactor && size > 8) {
+        if (size == items.length / rFactor && size > 8) {
             resizeDown(items.length / rFactor);
         }
 
-        if(nextLast == 0) {
+        if (nextLast == 0) {
             nextLast = items.length - 1;
         } else {
             nextLast--;
@@ -129,9 +131,17 @@ public class ArrayDeque<T> {
     }
 
     public T get(int index) {
-        if(index < 0 || index >= size) {
+        if (index < 0 || index >= size) {
             return null;
         }
-        return items[nextFirst + 1 + index];
+        if (nextFirst <= items.length / 2) {
+            return items[nextFirst + 1 + index];
+        } else {
+            if (nextFirst + 1 + index < items.length) {
+                return items[nextFirst + 1 + index];
+            } else {
+                return items[nextFirst + 1 + index - items.length];
+            }
+        }
     }
 }

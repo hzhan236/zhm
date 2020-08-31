@@ -135,7 +135,7 @@ public class LinkedListDeque<T> {
      * return null
     */
     public T getRecursive(int index) {
-        if (index <= 0 || index >= this.size()) {
+        if (index <= 0) {
             return null;
         }
         ListNode firstNode = sentinel.next;
@@ -145,7 +145,7 @@ public class LinkedListDeque<T> {
     private T getRecursiveHelper(int index, ListNode current) {
         if (index <= 0) {
             return current.item;
-        } else if (current == sentinel && index > 0) {
+        } else if (current == sentinel) {
             /** Returns null if index is out of bound */
             return null;
         }
