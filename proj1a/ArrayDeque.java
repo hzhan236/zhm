@@ -134,13 +134,13 @@ public class ArrayDeque<T> {
         if (index < 0 || index >= size) {
             return null;
         }
-        if (nextFirst + 1 < items.length / 2) {
-            return items[nextFirst + 1 + index];
+        if (nextFirst < nextLast) {
+            return items[nextFirst + index];
         } else {
-            if (nextFirst + 1 + index < items.length) {
-                return items[nextFirst + 1 + index];
+            if (index < items.length - (nextFirst + 1)) {
+                return items[(nextFirst + 1) + index];
             } else {
-                return items[nextFirst + 1 + index - items.length];
+                return items[index - (items.length - (nextFirst + 1))];
             }
         }
     }
