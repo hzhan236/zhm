@@ -30,7 +30,7 @@ public class ArrayDeque<T> {
         nextLast = (rFactor - 1) * size;
     }
     private void resizeDown(int capacity) {
-            T[] a = (T []) new Object[capacity];
+        T[] a = (T []) new Object[capacity];
         System.arraycopy(items, nextFirst + 1, a, 0,  size);
         items = a;
         nextFirst = items.length - 1;
@@ -38,28 +38,28 @@ public class ArrayDeque<T> {
     }
 
     public void addFirst(T item) {
-        if(size == items.length) {
+        if (size == items.length) {
             resizeUp(size * rFactor);
         }
         items[nextFirst] = item;
-        size ++;
-        if(nextFirst == 0) {
+        size++;
+        if (nextFirst == 0) {
             nextFirst = items.length - 1;
         } else {
-            nextFirst --;
+            nextFirst--;
         }
     }
 
     public void addLast(T item) {
-        if(size == items.length) {
+        if (size == items.length) {
             resizeUp(size * rFactor);
         }
         items[nextLast] = item;
-        size ++;
-        if(nextLast == items.length - 1) {
+        size++;
+        if (nextLast == items.length - 1) {
             nextLast = 0;
         } else {
-            nextLast ++;
+            nextLast++;
         }
     }
 
@@ -76,7 +76,7 @@ public class ArrayDeque<T> {
         int tempL = nextLast;
         while(tempF < items.length && items[tempF] != null) {
             System.out.print(items[tempF] + " ");
-            tempF ++;
+            tempF++;
         }
         tempF = 0;
         while(tempF < nextLast) {
@@ -84,7 +84,7 @@ public class ArrayDeque<T> {
             if (tempF != tempL - 1) {
                 System.out.print(" ");
             }
-            tempF ++;
+            tempF++;
         }
     }
 
@@ -100,16 +100,16 @@ public class ArrayDeque<T> {
         if(nextFirst == items.length - 1) {
             nextFirst = 0;
         } else {
-            nextFirst ++;
+            nextFirst++;
         }
         T save = items[nextFirst];
         items[nextFirst] = null;
-        size --;
+        size--;
         return save;
     }
 
     public T removeLast() {
-        if(size == 0) {
+        if(size ==0) {
             return null;
         }
 
@@ -118,13 +118,13 @@ public class ArrayDeque<T> {
         }
 
         if(nextLast == 0) {
-            nextLast = items.length-1;
+            nextLast = items.length - 1;
         } else {
-            nextLast --;
+            nextLast--;
         }
         T save = items[nextLast];
         items[nextLast] = null;
-        size --;
+        size--;
         return save;
     }
 

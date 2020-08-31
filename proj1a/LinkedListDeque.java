@@ -34,7 +34,7 @@ public class LinkedListDeque<T> {
     public void addFirst(T item) {
         sentinel.next = new ListNode(sentinel, item, sentinel.next);
         sentinel.next.next.prev = sentinel.next;
-        size ++;
+        size++;
     }
 
     /**
@@ -44,7 +44,7 @@ public class LinkedListDeque<T> {
     public void addLast(T item) {
         sentinel.prev = new ListNode(sentinel.prev, item, sentinel);
         sentinel.prev.prev.next = sentinel.prev;
-        size ++;
+        size++;
     }
 
     /**
@@ -88,7 +88,7 @@ public class LinkedListDeque<T> {
             return null;
         }
         T reVal = temp.item;
-        size --;
+        size--;
         sentinel.next = temp.next;
         temp.next.prev = sentinel;
         return reVal;
@@ -104,7 +104,7 @@ public class LinkedListDeque<T> {
             return null;
         }
         T reVal = temp.item;
-        size --;
+        size--;
         sentinel.prev = temp.prev;
         temp.prev.next = sentinel;
         return reVal;
@@ -114,13 +114,12 @@ public class LinkedListDeque<T> {
         if (index < size && index >= 0) {
             ListNode temp = sentinel;
             if (index <= size / 2) {
-                for (int i = 0; i <= index; i ++) {
+                for (int i = 0; i <= index; i++) {
                     temp = temp.next;
                 }
                 return temp.item;
-            }
-            else {
-                for (int i = 0; i < size - index; i ++) {
+            } else {
+                for (int i = 0; i < size - index; i++) {
                     temp = temp.prev;
                 }
                 return temp.item;
@@ -132,10 +131,11 @@ public class LinkedListDeque<T> {
     /**
      *
      * @param index
-     * @return the element in the given index recursively, if no such element, return null
+     * @return the element in the given index recursively, if no such element,
+     * return null
     */
     public T getRecursive(int index) {
-        if(index <= 0 || index >= this.size()) {
+        if (index <= 0 || index >= this.size()) {
             return null;
         }
         ListNode firstNode = sentinel.next;
@@ -145,8 +145,7 @@ public class LinkedListDeque<T> {
     private T getRecursiveHelper(int index, ListNode current) {
         if (index <= 0) {
             return current.item;
-        }
-        else if (current == sentinel && index > 0) { /* what if index is very large */
+        } else if (current == sentinel && index > 0) {
             /** Returns null if index is out of bound */
             return null;
         }
